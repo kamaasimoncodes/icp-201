@@ -1,0 +1,213 @@
+html,
+body,
+:root {
+  height: 100%;
+}
+body {
+  font-family: sans-serif;
+  font-size: 1.5rem;
+}
+.nav {
+  max-width: 1300px;
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav h1 {
+  font-weight: bold;
+  cursor: pointer;
+}
+.nav div {
+  display: flex;
+  column-gap: 10px;
+}
+.nav div a {
+  text-decoration: none;
+}
+.button {
+  padding: 4px;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: black;
+  color: white;
+}
+.home {
+  max-width: 1300px;
+  margin-inline: auto;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+button {
+  cursor: pointer;
+}
+.project {
+  max-width: 1300px;
+  margin-inline: auto;
+}
+.no {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.no h1 {
+  font-size: 17px;
+  font-weight: bold;
+}
+.projos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+.ma{
+  border:1px solid black;
+  padding: 2px;
+}
+.na img {
+  height: 200px;
+  width: 100%;
+}
+.bt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ma h1 {
+  font-size: 15px;
+}
+
+.about{
+  width: 650px;
+  margin-inline:auto;
+}
+.img{
+  width:100%;
+  height:300px;
+}
+.des h1{
+  font-size: 20px;
+}
+.des{
+  font-size: 14px;
+  color: gray;  
+}
+.more{
+  font-size: 13px;
+  color:violet;
+}
+.a{
+  margin-left: 14px;
+}
+.add{
+  text-decoration: underline;
+}
+.h1{
+  font-size: 14px;
+  color: violet;
+}
+.gu{
+  margin-top: 10px;
+  border: none !important;
+}
+
+.form{
+  width: 700px;
+  margin-inline: auto;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 4px;
+}
+.add2{
+  display: flex;
+  flex-direction: column;
+  margin-block: 3px;
+  align-items: start;
+  padding-inline:7px;
+}
+.add label{
+  font-weight: bold;
+  font-size: 13px;
+  padding-bottom: 4px;
+  text-decoration: none;
+}
+.add2 input{
+  border: 1px solid black;
+  border-radius: 3px;
+  width:100%;
+}
+.submit{
+  margin-top: 5px;
+  display: flex;
+  justify-content:end;
+}
+.add h1{
+  font-size:15px;
+}
+.add2 textarea{
+  border: 1px solid black;
+  border-radius: 3px;
+  width:100%;
+}
+.k{
+  padding: 10px;
+  color:red;
+  font-size: 14px;
+}
+.create {
+  border: 1px solid black;
+  width: 50%;
+  margin-inline: auto;
+  padding: 4px;
+  border-radius: 8px;
+}
+.create div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.create div h1 {
+  text-align: center;
+}
+.create div p {
+  font-weight: bold;
+}
+.create div button {
+  background-color: purple;
+  border-radius: 8px;
+}
+.form1 div {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-block: 3px;
+  padding-inline: 4px;
+}
+.form1 div input,textarea {
+  border: 1px solid black;
+  width: 100%;
+}
+.form1 div textarea {
+    border: 1px solid black;
+  }
+.submit {
+  border-radius: 8px;
+  border: 1px solid black;
+  padding: 2px;
+  margin-block: 4px;
+  margin-top: 7px;
+  background-color: blue;
+}
+.im{
+  text-align: center;
+  color: red;
+  padding-block: 4px;
+  text-decoration: none!important;
+  font-size: 15px;
+  font-family: cursive;
+}
