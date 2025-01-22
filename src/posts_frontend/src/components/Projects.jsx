@@ -23,15 +23,15 @@ const Projects = () => {
             {data.map((val, index) => (
               <div className="ma" key={index}>
                 <div className="na">
-                  <img src="../../public/h.jpg" alt="" />
+                  <img src={val.coverimage} alt="" />
                 </div>
-                    <h1 className="">{val.name}</h1>
+                    <h1 className="">{val.nameofproject}</h1>
                 <div className="bt">
                   <div className="bt2">
                     <p className="">{val.techused}</p>
                   </div>
                   <div className="bt3">
-                    <button className="button" onClick={()=>router("/details")}>View</button>
+                    <button className="button" onClick={()=>router(`/details/${val.projectid}`)}>View</button>
                   </div>
                 </div>
               </div>

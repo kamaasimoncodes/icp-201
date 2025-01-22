@@ -11,15 +11,10 @@ actor {
 
    type User={
     id:Principal;
-    username:Text;
-    email:Text;
-    githublink:Text;
     projects:[Project];
-    userimage:Text;
-    skills:Text;
   };
   type Project={
-    owner:Text;
+    owner:Principal;
     nameofproject:Text;
     githublink:Text;
     projectid:Text;
@@ -33,7 +28,7 @@ actor {
   let projects=HashMap.HashMap<Text,Project>(2,Text.equal,Text.hash);
 
   //register new user profile
-  public shared ({caller}) func register_user(username:Text,email:Text,glink:Text,skills:Text,userimage:Text):async Result.Result<Text,Text>{
+  public shared ({caller}) func register_user():async Result.Result<Text,Text>{
 
 
     //check if user is already registered
@@ -47,32 +42,14 @@ actor {
 
         let new_profile:User={
            id=caller;
-           username;
-           email;
-           githublink=glink;
            projects=[];
-           userimage;
-           skills;
         };
         users.put(caller,new_profile);
-        return #ok("profile created successfully")
+        return #ok("successfully")
       };
-      case(?user){
+      case(?_user){
 
-        //update profile
-
-          let new_profile:User={
-           id=caller;
-           username;
-           email;
-           githublink=glink;
-           projects=user.projects;
-           userimage;
-           skills;
-        };
-        users.put(caller,new_profile);
-
-        return #ok("profile updated")
+        return #ok("welcome")
       }
     }
   };
@@ -104,7 +81,7 @@ public shared ({caller}) func add_project( nameofproject:Text,githublink:Text,de
       //add new project
      let id:Text=Int.toText(Time.now());
       let new_project:Project={
-            owner=found.username;
+            owner=caller;
             nameofproject;
             githublink;
             projectid=id;
@@ -113,7 +90,7 @@ public shared ({caller}) func add_project( nameofproject:Text,githublink:Text,de
             techused;
            coverimage;
       };
-      projects.put(nameofproject,new_project);
+      projects.put(id,new_project);
 
       //update on users side
        let dappusers=Buffer.fromArray<Project>(found.projects);
@@ -122,12 +99,7 @@ public shared ({caller}) func add_project( nameofproject:Text,githublink:Text,de
         let updateduser=Buffer.toArray(dappusers);
         let updated:User={
           id=caller;
-           username=found.username;
-           email=found.email;
-           githublink=found.githublink;
            projects=updateduser;
-           userimage=found.userimage;
-           skills=found.skills;
         };
         users.put(caller,updated);
       return #ok("project added")
@@ -165,17 +137,7 @@ public shared ({caller}) func add_project( nameofproject:Text,githublink:Text,de
     }
   };
     //get user
-public query func get_user(id:Text):async Result.Result<?User,Text>{
-     let userid=Principal.fromText(id);
-    switch(users.get(userid)){
-      case (null){
-        return #err("user not found")
-      };
-      case (?found){
-        return #ok(?found)
-      }
-    }
-  };
+
     //login user
     public shared query ({caller}) func whoami():async Text{
 

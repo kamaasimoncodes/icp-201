@@ -1,49 +1,59 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useAuth } from "../auth/authetication";
+import { posts_backend } from "declarations/posts_backend";
 const Profile = () => {
-  const [auth, setAuth] = useState(true);
-  const data = [
-    {
-      name: "text-white clone",
-      techused: "next js react motoko",
-      chain: "icp",
-    },
-    {
-      name: "text-white clone",
-      techused: "next js react motoko",
-      chain: "icp",
-    },
-  ];
+  const { isAuthenticated, login, principal, logout } = useAuth();
+  const [data, setData] = useState([]);
+  const [errr, setError] = useState("");
   const router = useNavigate();
+  posts_backend.register_user().then((result) => {
+    console.log(result, "profi0le");
+  });
+  useEffect(() => {
+    posts_backend.get_my_profile().then((result) => {
+      console.log(result, "profi0le77777");
+      setData(result.ok.projects);
+    });
+  }, []);
+
   return (
     <>
-      {auth ? (
+      {isAuthenticated ? (
         <>
-
-        <div className="">
-            <a href="/createprofile" className="k">create or update profiile</a>
-          <div className="project">
-            {data.length == 0 ? (
-              <div className="no">
-                <h1>No you dont any project vailable </h1>
-              </div>
-            ) : (
-              <>
-                <div className="projos gu">
-                  {data.map((val, index) => (
-                    <div className="m" key={index}>
-                      <div className="na">
-                        <img src="../../public/h.jpg" alt="" />
-                      </div>
-                      <h1 className="h1">{val.name}</h1>
-                     <button className="button">View</button>
-                    </div>
-                  ))}
+          <div className="">
+            <div className="project">
+              {!data ? (
+                <div className="no">
+                  <h1>No you dont any project vailable </h1>
                 </div>
-              </>
-            )}
-          </div>
+              ) : (
+                <>
+                  <div className="projos">
+                    {data.map((val, index) => (
+                      <div className="ma" key={index}>
+                        <div className="na">
+                          <img src={val.coverimage} alt="" />
+                        </div>
+                        <h1 className="">{val.nameofproject}</h1>
+                        <div className="bt">
+                          <div className="bt3">
+                            <button
+                              className="button"
+                              onClick={() =>
+                                router(`/details/${val.projectid}`)
+                              }
+                            >
+                              View
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </>
       ) : (

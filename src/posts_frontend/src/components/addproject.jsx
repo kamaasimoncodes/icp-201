@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../auth/authetication";
-import { posts_backend } from 'declarations/posts_backend';
+import { posts_backend } from "declarations/posts_backend";
+import { useNavigate } from "react-router-dom";
 const AddProject = () => {
   const { isAuthenticated, login, principal, logout } = useAuth();
 
@@ -10,28 +11,27 @@ const AddProject = () => {
   const [image1, setImage1] = useState("");
   const [chain, setChain] = useState("");
   const [tech, setTech] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [errr, setError] = useState("");
+  const router = useNavigate();
 
-  if (!isAuthenticated) {
-    return <div className="no">must be logged in</div>;
-  }
   const handleimage1 = (e) => {
     const data = new FileReader();
     data.addEventListener("load", () => setImage1(data.result));
     data.readAsDataURL(e.target.files[0]);
   };
+
+  if (!isAuthenticated) {
+    return <div className="no">must be logged in</div>;
+  }
+   posts_backend.register_user().then((result) => {
+  
+  });
   const handlesubmit = (e) => {
     e.preventDefault();
-
+    console.log("there");
     posts_backend
-    .add_project(
-        name,
-        link,
-        description,
-        chain,
-        tech,
-        image1,
-      
-      )
+      .add_project(name, link, description, chain, tech, image1)
       .then((result) => {
         console.log(result, "added");
         alert(result.ok);
@@ -40,7 +40,7 @@ const AddProject = () => {
   return (
     <div className="">
       <div className="add">
-        <p className="im">you must create profile inorder to add a project</p>
+    
         <h1 className="">add project</h1>
         <div className="add1">
           <form className="form" onSubmit={handlesubmit}>
@@ -49,7 +49,6 @@ const AddProject = () => {
               <input
                 type="text"
                 value={name}
-               
                 required
                 className=""
                 onChange={(e) => setName(e.target.value)}
@@ -60,7 +59,6 @@ const AddProject = () => {
               <input
                 type="text"
                 value={link}
-                
                 required
                 className=""
                 onChange={(e) => setLink(e.target.value)}
@@ -71,7 +69,6 @@ const AddProject = () => {
               <input
                 type="text"
                 value={chain}
-                
                 required
                 className=""
                 onChange={(e) => setChain(e.target.value)}
@@ -105,8 +102,10 @@ const AddProject = () => {
               <label htmlFor="">Image cover of project</label>
               <input type="file" required onChange={handleimage1} />
             </div>
-             <div className="submit ">
-              <button className="butt" type="submit">submit</button>
+            <div className="submit ">
+              <button className="butt" type="submit">
+                submit
+              </button>
             </div>
           </form>
         </div>

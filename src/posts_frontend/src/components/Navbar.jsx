@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthButton from "../auth/login";
+import { useAuth } from "../auth/authetication";
 const NavBar = () => {
-  const [auth, setAuth] = useState(true);
+  const { isAuthenticated, login, principal, logout } = useAuth();
   const router=useNavigate();
   return (
     <div className="nav">
@@ -15,7 +16,7 @@ const NavBar = () => {
       <div className="">
         <Link to="/profile">Profile</Link>
         {
-          auth&&(
+          isAuthenticated&&(
             <>
                       <Link to="/addproject" className="add">add project</Link>
             </>
